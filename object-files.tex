@@ -439,6 +439,10 @@ The following program property types are defined:
       \hline
       \texttt{GNU_PROPERTY_STACK_SIZE} & \texttt{1} \\
       \texttt{GNU_PROPERTY_NO_COPY_ON_PROTECTED} & \texttt{2} \\
+      \texttt{GNU_PROPERTY_UINT32_AND_LO} & \texttt{0xb0000000} \\
+      \texttt{GNU_PROPERTY_UINT32_AND_HI} & \texttt{0xb0007fff} \\
+      \texttt{GNU_PROPERTY_UINT32_OR_LO} & \texttt{0xb0008000} \\
+      \texttt{GNU_PROPERTY_UINT32_OR_HI} & \texttt{0xb000ffff} \\
       \texttt{GNU_PROPERTY_LOPROC} & \texttt{0xc0000000} \\
       \texttt{GNU_PROPERTY_HIPROC} & \texttt{0xdfffffff} \\
       \texttt{GNU_PROPERTY_LOUSER} & \texttt{0xe0000000} \\
@@ -469,6 +473,20 @@ The following program property types are defined:
    \code{GNU_PROPERTY_NO_COPY_ON_PROTECTED} property.  Its
    \code{PR_DATASZ} should be 0.
    \end{sloppypar}
+ \item[GNU_PROPERTY_UINT32_AND_LO..GNU_PROPERTY_UINT32_AND_HI]
+   A bit in the output \code{pr_data} field is set only if it is set in
+   all relocatable input \code{pr_data} fields.  If all bits in the
+   the output \code{pr_data} field are zero, this property should be
+   removed from output.  If the bit is 1, all input relocatables have
+   the feature.  If the bit is 0 or the property is missing, it is
+   unknown whether all input relocatables have the feature.
+ \item[GNU_PROPERTY_UINT32_OR_LO..GNU_PROPERTY_UINT32_OR_HI]
+   A bit in the output \code{pr_data} field is set if it is set in any
+   relocatable input \code{pr_data} fields.  If all bits in the
+   the output \code{pr_data} field are zero, this property should be
+   removed from output.  If the bit is 1, some input relocatables have
+   the feature.  If the bit is 0 or the property is missing, it is
+   unknown whether any input relocatables have the feature.
  \item[GNU_PROPERTY_LOPROC through GNU_PROPERTY_HIPROC]
    Values in this inclusive range are reserved for processor-specific
    semantics.
