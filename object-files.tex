@@ -433,6 +433,7 @@ The following program property types are defined:
 \begin{table}[H]
 \Hrule
   \caption{Program Property Types}
+  \myfontsize
   \begin{center}
     \begin{tabular}[t]{l|l}
       \multicolumn{1}{c}{Name} & \multicolumn{1}{c}{Value} \\
@@ -442,6 +443,7 @@ The following program property types are defined:
       \texttt{GNU_PROPERTY_UINT32_AND_LO} & \texttt{0xb0000000} \\
       \texttt{GNU_PROPERTY_UINT32_AND_HI} & \texttt{0xb0007fff} \\
       \texttt{GNU_PROPERTY_UINT32_OR_LO} & \texttt{0xb0008000} \\
+      \texttt{GNU_PROPERTY_1_NEEDED} & \texttt{GNU_PROPERTY_UINT32_OR_LO + 0} \\
       \texttt{GNU_PROPERTY_UINT32_OR_HI} & \texttt{0xb000ffff} \\
       \texttt{GNU_PROPERTY_LOPROC} & \texttt{0xc0000000} \\
       \texttt{GNU_PROPERTY_HIPROC} & \texttt{0xdfffffff} \\
@@ -487,12 +489,43 @@ The following program property types are defined:
    removed from output.  If the bit is 1, some input relocatables have
    the feature.  If the bit is 0 or the property is missing, it is
    unknown whether any input relocatables have the feature.
+ \item[GNU_PROPERTY_1_NEEDED]
+   The \code{pr_data} field contains a 4-byte integer to indicate the
+   needed properties by object file.
  \item[GNU_PROPERTY_LOPROC through GNU_PROPERTY_HIPROC]
    Values in this inclusive range are reserved for processor-specific
    semantics.
  \item[GNU_PROPERTY_LOUSER through GNU_PROPERTY_HIUSER]
    Values in this inclusive range are reserved for application-specific
    semantics.
+\end{description}
+
+The following bits are defined for \code{GNU_PROPERTY_1_NEEDED}:
+
+\begin{table}[H]
+\Hrule
+  \caption{GNU_PROPERTY_1_NEEDED Bit Flags}
+  \begin{center}
+    \begin{tabular}[t]{l|l}
+      \multicolumn{1}{c}{Name} & \multicolumn{1}{c}{Value} \\
+      \hline
+     \texttt{GNU_PROPERTY_1_NEEDED_INDIRECT_EXTERN_ACCESS} & \texttt{1U << 0} \\
+    \end{tabular}
+  \end{center}
+\Hrule
+\end{table}
+
+\begin{description}
+ \item[GNU_PROPERTY_1_NEEDED_INDIRECT_EXTERN_ACCESS]
+   \begin{sloppypar}
+   This indicates that protected data and function symbols can be treated
+   as locally defined.  Linker should clear this bit in executable when
+   there are non-GOT or non-PLT relocations in input relocatables without
+   this bit set.  Run-time loader should disallow copy relocations against
+   protected data symbols and non-GOT function pointer references to
+   protected function symbols which are defined in share objects with this
+   property.  This also implies \code{GNU_PROPERTY_NO_COPY_ON_PROTECTED}.
+   \end{sloppypar}
 \end{description}
 
 \subsection{\code{.note.ABI-tag} section}
