@@ -505,23 +505,26 @@ The following bits are defined for \code{GNU_PROPERTY_1_NEEDED}:
 \begin{table}[H]
 \Hrule
   \caption{GNU_PROPERTY_1_NEEDED Bit Flags}
-  \myfontsize
   \begin{center}
     \begin{tabular}[t]{l|l}
       \multicolumn{1}{c}{Name} & \multicolumn{1}{c}{Value} \\
       \hline
-     \texttt{GNU_PROPERTY_1_NEEDED_SINGLE_GLOBAL_DEFINITION} & \texttt{1U << 0} \\
+     \texttt{GNU_PROPERTY_1_NEEDED_INDIRECT_EXTERN_ACCESS} & \texttt{1U << 0} \\
     \end{tabular}
   \end{center}
 \Hrule
 \end{table}
 
 \begin{description}
- \item[GNU_PROPERTY_1_NEEDED_SINGLE_GLOBAL_DEFINITION]
+ \item[GNU_PROPERTY_1_NEEDED_INDIRECT_EXTERN_ACCESS]
    \begin{sloppypar}
-   This indicates that the object file requires canonical function
-   pointers and cannot be used with copy relocation.  This also implies
-   \code{GNU_PROPERTY_NO_COPY_ON_PROTECTED}.
+   This indicates that protected data and function symbols can be treated
+   as locally defined.  Linker should clear this bit in executable when
+   there are non-GOT or non-PLT relocations in input relocatables without
+   this bit set.  Run-time loader should disallow copy relocations against
+   protected data symbols and non-GOT function pointer references to
+   protected function symbols which are defined in share objects with this
+   property.  This also implies \code{GNU_PROPERTY_NO_COPY_ON_PROTECTED}.
    \end{sloppypar}
 \end{description}
 
