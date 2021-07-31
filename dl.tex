@@ -28,6 +28,29 @@ The following \xOS program header types are defined:
       Section~\ref{sec_property} of this document.
 \end{description}
 
+\section{Dynamic Section}
+
+The following dynamic tags are defined:
+
+\begin{table}[H]
+\Hrule
+  \caption{Dynamic Tags}
+  \begin{center}
+    \begin{tabular}[t]{l|l}
+      \multicolumn{1}{c}{Name} & \multicolumn{1}{c}{Value} \\
+      \hline
+      \texttt{DT_GNU_DEBUG} & \texttt{0x6ffffff8} \\
+    \end{tabular}
+  \end{center}
+\Hrule
+\end{table}
+
+\begin{description}
+ \item[DT_GNU_DEBUG]
+   This tag is used for debugging.  It holds the address of a pointer
+   whose content will be filled by the dynamic linker.
+\end{description}
+
 \section{Note Section}
 
 The following note descriptor types are defined:
