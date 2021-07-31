@@ -28,6 +28,30 @@ The following \xOS program header types are defined:
       Section~\ref{sec_property} of this document.
 \end{description}
 
+\section{Dynamic Section}
+
+The following dynamic tags are defined:
+
+\begin{table}[H]
+\Hrule
+  \caption{Dynamic Tags}
+  \begin{center}
+    \begin{tabular}[t]{l|l}
+      \multicolumn{1}{c}{Name} & \multicolumn{1}{c}{Value} \\
+      \hline
+      \texttt{DT_DEBUGSZ} & \texttt{0x6ffffff8} \\
+    \end{tabular}
+  \end{center}
+\Hrule
+\end{table}
+
+\begin{description}
+ \item[DT_DEBUGSZ]
+   This tag is used for debugging.  It holds the size of the structure
+   of debugger interface, whose address is stored in the DT_DEBUG
+   element.
+\end{description}
+
 \section{Note Section}
 
 The following note descriptor types are defined:
