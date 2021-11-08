@@ -1,6 +1,33 @@
 
 \chapter{Object Files}
 
+\section{ELF Header}
+
+The following object file types are defined.
+
+\begin{table}[H]
+\Hrule
+  \caption{Object file types}
+  \begin{center}
+    \begin{tabular}[t]{l|l}
+      \multicolumn{1}{c}{Name} & \multicolumn{1}{c}{Value} \\
+      \hline
+      \texttt{ET_GNU_DEBUG} & \texttt{0xfe00} \\
+  \end{tabular}
+ \end{center}
+\Hrule
+\end{table}
+
+\begin{description}
+  \item[ET_GNU_DEBUG] GNU debug information file.  A \code{ET_GNU_DEBUG}
+    file may contain the same program headers as the associated
+    (original) object file, but all the loadable segments are missing from
+    the \code{ET_GNU_DEBUG} file (including the dynamic segment).
+    Consumers may skip \code{ET_GNU_DEBUG} files.  Debuggers can extract
+    debug information of the associated object file from the
+    \code{ET_GNU_DEBUG} file.
+\end{description}
+
 \section{Sections}
 
 The following section types are defined.
