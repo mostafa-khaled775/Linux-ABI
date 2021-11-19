@@ -57,6 +57,62 @@ The following note descriptor types are defined:
    document.
 \end{description}
 
+\section{Dynamic Linking}
+
+\subsubsection{Dynamic Section}
+
+The following \xOS-specific dynamic array tags are defined:
+
+\begin{table}[H]
+\Hrule
+  \caption{Dynamic Array Tags}
+  \begin{center}
+    \begin{tabular}[t]{l|l}
+      \multicolumn{1}{c}{Name}    & \multicolumn{1}{c}{Value} \\
+      \hline
+      \multicolumn{2}{c}{Dynamic tags containing numeric values} \\
+      \texttt{DT_GNU_FLAGS_1}     & \texttt{0x6ffffdf4} \\
+      \hline
+    \end{tabular}
+  \end{center}
+\Hrule
+\end{table}
+
+\begin{description}
+ \item[DT_GNU_FLAGS_1]
+      The tag contains \xOS-specific flag values for the object.  See
+      table~\ref{dt_gnu_flags_1} for interpretations of flag values.
+\end{description}
+
+\begin{table}[H]
+\Hrule
+  \caption{\texttt{DT_GNU_FLAGS_1} Flag Values}
+  \label{dt_gnu_flags_1}
+  \begin{center}
+    \begin{tabular}[t]{l|l}
+      \multicolumn{1}{c}{Name} & \multicolumn{1}{c}{Value} \\
+      \hline
+      \texttt{DF_GNU_1_UNIQUE} & \texttt{0x00000001} \\
+    \end{tabular}
+  \end{center}
+\Hrule
+\end{table}
+
+\begin{description}
+ \item[DF_GNU_1_UNIQUE]
+      If this flag is set in a shared object, only one instance of this
+      shared object should be loaded across the entire address space
+      unless overridden explicitly by the caller of the loading mechanism.
+
+      Actions that would otherwise cause a second, separate copy of this
+      object to be loaded should instead re-use the existing mapping if
+      one exists.
+
+      Mappings which were loaded with this requirement overridden
+      should \textit{not} be considered for re-use in this way by
+      the loader.
+\end{description}
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "abi"

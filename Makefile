@@ -1,5 +1,5 @@
 INCLUDES  := abi-index.tex introduction.tex \
-	     macros.tex object-files.tex
+	     macros.tex object-files.tex dl.tex
 
 ALL_FILES := abi.tex $(INCLUDES)
 
