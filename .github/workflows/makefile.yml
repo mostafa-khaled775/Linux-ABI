@@ -1,0 +1,27 @@
+name: Makefile CI
+
+on:
+  push:
+    branches: [ "hjl/master" ]
+  pull_request:
+    branches: [ "hjl/master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+
+    - name: Install dependencies
+      run: apt-get install texlive-latex-base
+
+    - name: Build abi.pdf
+      run: make abi.pdf
+
+    - uses: actions/upload-artifact@v4.4.3
+      with:
+        name: abi.pdf
+        path: abi.pdf
